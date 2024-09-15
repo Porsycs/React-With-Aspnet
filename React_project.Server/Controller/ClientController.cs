@@ -33,7 +33,7 @@ namespace React_project.Server.Controller
         }
         [HttpGet]
         [Route("GetClientById")]
-        public async Task<IActionResult> GetClientById([FromBody] Guid id)
+        public async Task<IActionResult> GetClientById([FromQuery] Guid id)
         {
             try
             {
@@ -49,7 +49,7 @@ namespace React_project.Server.Controller
 
         [HttpGet]
         [Route("GetClientByName")]
-        public async Task<IActionResult> GetClientByName([FromBody] string name)
+        public async Task<IActionResult> GetClientByName([FromQuery] string name)
         {
             try
             {
@@ -64,7 +64,7 @@ namespace React_project.Server.Controller
         }
         [HttpGet]
         [Route("GetClientByEmail")]
-        public async Task<IActionResult> GetClientByEmail([FromBody] string email)
+        public async Task<IActionResult> GetClientByEmail([FromQuery] string email)
         {
             try
             {
@@ -79,7 +79,7 @@ namespace React_project.Server.Controller
         }
         [HttpGet]
         [Route("GetClientByDocument")]
-        public async Task<IActionResult> GetClientByDocument([FromBody] string document)
+        public async Task<IActionResult> GetClientByDocument([FromQuery] string document)
         {
             try
             {
@@ -95,7 +95,7 @@ namespace React_project.Server.Controller
 
         [HttpGet]
         [Route("InactiveClient")]
-        public async Task<IActionResult> InactiveClient([FromBody] Guid id)
+        public async Task<IActionResult> InactiveClient([FromQuery] Guid id)
         {
             try
             {
@@ -111,7 +111,7 @@ namespace React_project.Server.Controller
 
         [HttpDelete]
         [Route("DeleteClientById")]
-        public async Task<IActionResult> DeleteClientById([FromBody] Guid id)
+        public async Task<IActionResult> DeleteClientById([FromQuery] Guid id)
         {
             try
             {

@@ -97,6 +97,7 @@ namespace React_project.Server.Repositories
             catch (Exception e)
             {
                 SentrySdk.CaptureException(e);
+                throw;
             }
         }
 
@@ -111,6 +112,7 @@ namespace React_project.Server.Repositories
             catch (Exception e)
             {
                 SentrySdk.CaptureException(e);
+                throw;
             }
         }
 
@@ -130,6 +132,7 @@ namespace React_project.Server.Repositories
             catch (Exception e)
             {
                 SentrySdk.CaptureException(e);
+                throw;
             }
         }
 
@@ -148,6 +151,7 @@ namespace React_project.Server.Repositories
             catch (Exception e)
             {
                 SentrySdk.CaptureException(e);
+                throw;
             }
         }
     }
