@@ -1,0 +1,38 @@
+# Ignorar arquivos do Node.js e React
+node_modules/
+build/
+.env
+npm-debug.log
+yarn-error.log
+package-lock.json
+yarn.lock
+
+# Ignorar arquivos do Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.csproj.user
+*.csproj.g.json
+
+# Ignorar arquivos do .NET Core
+bin/
+obj/
+*.dll
+*.exe
+*.pdb
+*.cache
+*.log
+
+# Ignorar arquivos de configuração do IDE
+.idea/
+*.suo
+*.user
+*.sln
+*.swp
+*.tmp
+
+# Ignorar arquivos de sistema
+.DS_Store
+Thumbs.db
