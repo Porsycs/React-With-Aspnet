@@ -1,5 +1,6 @@
 ﻿using Azure.Core;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using React_project.Server.Interfaces;
 using React_project.Server.Models;
 using React_project.Server.Models.ViewModels;
@@ -11,9 +12,11 @@ namespace React_project.Server.Controller
     public class ClientController : ControllerBase
     {
         private readonly IClientRepository _clientRepository;
-        public ClientController(IClientRepository clientRepository)
+        private readonly ClientService _clientService;
+        public ClientController(IClientRepository clientRepository, ClientService clientService)
         {
             _clientRepository = clientRepository;
+            _clientService = clientService;
         }
 
         [HttpGet]
@@ -99,7 +102,14 @@ namespace React_project.Server.Controller
         {
             try
             {
-                await _clientRepository.InactiveClient(id);
+                var client = await _clientRepository.GetClientById(id);
+                if (client is not null)
+                {
+                    client.operation = "inactive";
+
+                    var clientData = JsonConvert.SerializeObject(client);
+                    _clientService.SendMessage(clientData);
+                }
                 return Ok();
             }
             catch (Exception e)
@@ -115,7 +125,15 @@ namespace React_project.Server.Controller
         {
             try
             {
-                await _clientRepository.DeleteClientById(id);
+                var client = await _clientRepository.GetClientById(id);
+                if (client is not null)
+                {
+                    client.operation = "delete";
+
+                    var clientData = JsonConvert.SerializeObject(client);
+                    _clientService.SendMessage(clientData);
+                }
+
                 return Ok();
             }
             catch (Exception e)
@@ -136,10 +154,13 @@ namespace React_project.Server.Controller
                     Name = clientDTO.Name,
                     Email = clientDTO.Email,
                     document = clientDTO.document,
-                    phone = clientDTO.phone
+                    phone = clientDTO.phone,
+                    operation = "create"
                 };
 
-                await _clientRepository.CreateClient(client);
+                var clientData = JsonConvert.SerializeObject(client);
+                _clientService.SendMessage(clientData);
+
                 return Ok(client);
             }
             catch (Exception e)
@@ -162,9 +183,12 @@ namespace React_project.Server.Controller
                     document = updateClientDTO.document,
                     phone = updateClientDTO.phone,
                     active = updateClientDTO.active,
+                    operation = "update"
                 };
 
-                await _clientRepository.UpdateClient(client);
+                var clientData = JsonConvert.SerializeObject(client);
+                _clientService.SendMessage(clientData);
+
                 return Ok(client);
             }
             catch (Exception e)

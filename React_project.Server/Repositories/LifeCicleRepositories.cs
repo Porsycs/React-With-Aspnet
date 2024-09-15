@@ -6,6 +6,9 @@ namespace React_project.Server.Repositories
     {
         public static void LifeCicleRepositoriesConfiguration(IServiceCollection services)
         {
+            services.AddSingleton<RabbitMQConfigurationService>();
+            services.AddSingleton<ClientService>();
+            services.AddHostedService<ClientConsumerService>();
             services.AddScoped<IClientRepository, ClientRepository>();
         }
 

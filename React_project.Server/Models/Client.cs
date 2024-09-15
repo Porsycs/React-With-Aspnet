@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace React_project.Server.Models
 {
@@ -25,5 +26,8 @@ namespace React_project.Server.Models
         public string? document { get; set; }
         [Required]
         public bool active { get; set; } = true;
+
+        [NotMapped]
+        public string? operation { get; set; }
     }
 }

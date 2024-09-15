@@ -10,8 +10,26 @@ services:
       - "8081:8081"
     depends_on:
       - sqlserver
+      - rabbitmq  # Adicionar dependência do RabbitMQ
     environment:
       - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=mydb;User=sa;Password=ComplexPassword123!;
+      - RabbitMQ__HostName=rabbitmq  # Definir o RabbitMQ como o host para a API
+      - RabbitMQ__UserName=guest
+      - RabbitMQ__Password=guest
+    networks:
+      - app-network
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    ports:
+      - "5672:5672"  # Porta de comunicação com a aplicação
+      - "15672:15672"  # Porta do painel de administração
+    networks:
+      - app-network
 
   sqlserver:
     image: "mcr.microsoft.com/mssql/server:2022-latest"
@@ -22,6 +40,12 @@ services:
       - "1433:1433"
     volumes:
       - sqlserverdata:/var/opt/mssql
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
 
 volumes:
   sqlserverdata:
