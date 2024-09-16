@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace React_project.Server.Models
 {
@@ -28,6 +29,7 @@ namespace React_project.Server.Models
         public bool active { get; set; } = true;
 
         [NotMapped]
+        [JsonIgnore]
         public string? operation { get; set; }
     }
 }
